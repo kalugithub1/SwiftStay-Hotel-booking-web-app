@@ -1,6 +1,6 @@
 // function to check availability of the room
 
-import transporter from "../configs/nodemailer.js";
+//import transporter from "../configs/nodemailer.js";
 import Booking from "../models/Booking.js";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
@@ -74,6 +74,7 @@ export const createBooking = async (req, res) => {
       checkOutDate,
       totalPrice,
     });
+    /*
 
     const mailOptions = {
       from: process.env.SENDER_EMAIL,
@@ -104,6 +105,7 @@ export const createBooking = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
+    */
 
     res.json({ success: true, message: "Booking created successfully" });
   } catch (error) {
