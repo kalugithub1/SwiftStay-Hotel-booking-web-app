@@ -8,7 +8,7 @@ const Testimonials = () => {
     <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 pt-20 pb-30">
       <Title
         title="What our Guests Say"
-        subtitle="Discover why discerning travelers consistently choose SwiftStay for their exclusive and luxurious accommodations around the world."
+        subtitle="Discover why discerning travelers consistently choose SwiftStay for their exclusive and luxurious accommodations in Kenya."
       />
 
       <div className="flex flex-wrap items-center  gap-6 mt-20 ">

@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="max-w-80">
           <h1 className="mb-4 h-8 md:h-9">SWIFTSTAY</h1>
           <p className="text-sm">
-            Discover the world's most extraordinary places to stay, form
+            Discover the Kenya's most extraordinary places to stay, form
             boutique hotels to luxury villas and private islands.
           </p>
           <div className="flex items-center gap-3 mt-4">

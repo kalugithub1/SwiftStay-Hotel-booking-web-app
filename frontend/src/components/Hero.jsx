@@ -36,7 +36,7 @@ const Hero = () => {
         Discover Your Perfect Gateway Destination
       </h1>
       <p className="max-w-130 mt-2 text-sm md:text-base">
-        Unparalleled luxury and comfort await at the world's most exclusive
+        Unparalleled luxury and comfort await at the Kenya's most exclusive
         hotels and resorts. Start your journey today.
       </p>
 
@@ -55,6 +55,7 @@ const Hero = () => {
             list="destinations"
             id="destinationInput"
             type="text"
+            autoComplete="off"
             className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none"
             placeholder="Type here"
             required

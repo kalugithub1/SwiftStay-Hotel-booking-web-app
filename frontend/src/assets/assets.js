@@ -73,7 +73,7 @@ export const assets = {
   totalRevenueIcon,
 };
 
-export const cities = ["Dubai", "Singapore", "New York", "London"];
+export const cities = ["Nairobi", "Mombasa", "Nakuru", "Kisumu"];
 
 // Exclusive Offers Dummy Data
 export const exclusiveOffers = [
@@ -82,7 +82,7 @@ export const exclusiveOffers = [
     title: "Summer Escape Package",
     description: "Enjoy a complimentary night and daily breakfast",
     priceOff: 25,
-    expiryDate: "Aug 31",
+    expiryDate: "Dec 10",
     image: exclusiveOfferCardImg1,
   },
   {
@@ -90,7 +90,7 @@ export const exclusiveOffers = [
     title: "Romantic Getaway",
     description: "Special couples package including spa treatment",
     priceOff: 20,
-    expiryDate: "Sep 20",
+    expiryDate: "Nov 25",
     image: exclusiveOfferCardImg2,
   },
   {
@@ -99,7 +99,7 @@ export const exclusiveOffers = [
     description:
       "Book 60 days in advance and save on your stay at any of our luxury properties worldwide.",
     priceOff: 30,
-    expiryDate: "Sep 25",
+    expiryDate: "Dec 20",
     image: exclusiveOfferCardImg3,
   },
 ];
@@ -108,10 +108,10 @@ export const exclusiveOffers = [
 export const testimonials = [
   {
     id: 1,
-    name: "Emma Rodriguez",
-    address: "Barcelona, Spain",
+    name: "Victor Kamau",
+    address: "Nairobi, Kenya",
     image:
-      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200",
+      "https://static.vecteezy.com/system/resources/previews/032/175/950/non_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg",
     rating: 5,
     review:
       "I've used many booking platforms before, but none compare to the personalized experience and attention to detail that Swifttay provides.",
@@ -121,17 +121,17 @@ export const testimonials = [
     name: "Liam Johnson",
     address: "New York, USA",
     image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200",
+      "https://thumbs.dreamstime.com/b/faceless-businessman-icon-business-people-user-profile-picture-portrait-symbol-member-circle-button-avatar-photo-silhouette-272121204.jpg",
     rating: 4,
     review:
       "SwiftStay exceeded my expectations. The booking process was seamless, and the hotels were absolutely top-notch. Highly recommended!",
   },
   {
     id: 3,
-    name: "Sophia Lee",
-    address: "Seoul, South Korea",
+    name: "Abidemi Adebayo",
+    address: "Abuja, Nigeria",
     image:
-      "https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=200",
+      "https://static.vecteezy.com/system/resources/previews/032/176/311/non_2x/business-avatar-profile-black-icon-woman-of-user-flat-symbol-in-trendy-filled-style-isolated-on-female-profile-people-diverse-face-for-social-network-or-web-vector.jpg",
     rating: 5,
     review:
       "Amazing service! I always find the best luxury accommodations through SwiftStay. Their recommendations never disappoint!",
@@ -182,17 +182,17 @@ export const userDummyData = {
   createdAt: "2025-03-25T09:29:16.367Z",
   updatedAt: "2025-04-10T06:34:48.719Z",
   __v: 1,
-  recentSearchedCities: ["New York"],
+  recentSearchedCities: ["Nairobi"],
 };
 
 // Hotel Dummy Data
 export const hotelDummyData = {
   _id: "67f76393197ac559e4089b72",
-  name: "Urbanza Suites",
-  address: "Main Road  123 Street , 23 Colony",
-  contact: "+0123456789",
+  name: "Safari Park",
+  address: "Thika Road, Kasarani",
+  contact: "+254700000000",
   owner: userDummyData,
-  city: "New York",
+  city: "Nairobi",
   createdAt: "2025-04-10T06:22:11.663Z",
   updatedAt: "2025-04-10T06:22:11.663Z",
   __v: 0,
