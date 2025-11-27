@@ -5,6 +5,7 @@ import { assets } from "../assets/assets";
 import { useClerk, UserButton } from "@clerk/clerk-react";
 import { useAppContext } from "../context/AppContext";
 
+// Custom Book icon used in UserButton menu
 const BookIcon = () => (
   <svg
     className="w-4 h-4 text-gray-700"
@@ -24,21 +25,27 @@ const BookIcon = () => (
     />
   </svg>
 );
+
+// Navbar component
 const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Hotels", path: "/rooms" },
   ];
 
+  // State to track scroll for dynamic styling
   const [isScrolled, setIsScrolled] = useState(false);
+  // State for mobile menu visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { openSignIn } = useClerk();
+  const { openSignIn } = useClerk(); // Clerk sign-in handler
 
-  const location = useLocation();
+  const location = useLocation(); // To detect route changes
 
+  // App context for user info, navigation, and hotel owner status
   const { user, navigate, isOwner, setShowHotelReg } = useAppContext();
 
+  // Detect scroll and route changes to update navbar style
   useEffect(() => {
     if (location.pathname !== "/") {
       setIsScrolled(true);

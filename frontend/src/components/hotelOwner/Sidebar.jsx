@@ -2,14 +2,17 @@ import React from "react";
 import { assets } from "../../assets/assets";
 import { NavLink } from "react-router-dom";
 
+// Sidebar component for hotel owners (dashboard navigation)
 const Sidebar = () => {
   const sidebarLinks = [
+    // Sidebar menu items with label, route path, and icon
     { name: "Dashboard", path: "/owner", icon: assets.dashboardIcon },
     { name: "Add Room", path: "/owner/add-room", icon: assets.addIcon },
     { name: "List Room", path: "/owner/list-room", icon: assets.listIcon },
   ];
   return (
     <div className="md:w-64 w-16 border-r h-full text-base border-gray-300 pt-4 flex flex-col transition-all duration-300">
+      {/* Loop through sidebar links and create NavLink buttons */}
       {sidebarLinks.map((item, index) => (
         <NavLink
           to={item.path}
@@ -23,8 +26,10 @@ const Sidebar = () => {
             }`
           }
         >
+          {/* Sidebar icon */}
           <img src={item.icon} alt={item.name} className="min-h-6 min-w-6" />
 
+          {/* Menu text (hidden on smaller screens) */}
           <p className="md:block hidden text-center">{item.name}</p>
         </NavLink>
       ))}

@@ -2,22 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 
+// Component to display an individual hotel card
+// Props:
+//   - room: hotel room data including images, price, hotel info
+//   - index: position in the list, used for conditional styling
 const HotelCard = ({ room, index }) => {
   return (
+    // Link to the room detail page
     <Link
       to={"/rooms/" + room._id}
       onClick={() => scrollTo(0, 0)}
       key={room._id}
       className="relative max-w-70 w-full rounded-xl overflow-hidden bg-white text-gray-500/90 shadow-[0px-4px-rgba(0,0,0,0.05)]"
     >
+      {/* Main room image */}
       <img src={room.images[0]} alt="" />
 
+      {/* Highlight tag for alternating cards */}
       {index % 2 === 0 && (
         <p className="px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full">
           Best Seller
         </p>
       )}
+
+      {/* Card content */}
       <div className="p-4 pt-5">
+        {/* Hotel name and rating */}
         <div className="flex items-center justify-between">
           <p className="font-playfair text-xl font-medium text-gray-800">
             {room.hotel.name}
@@ -26,10 +36,14 @@ const HotelCard = ({ room, index }) => {
             <img src={assets.starIconFilled} alt="Star-Icon" /> 4.5
           </div>
         </div>
+
+        {/* Hotel location */}
         <div className="flex items-center gap-1 text-sm">
           <img src={assets.locationIcon} alt="location-icon" />
           <span>{room.hotel.address}</span>
         </div>
+
+        {/* Price and book button */}
         <div className="flex items-center justify-between mt-4">
           <p>
             <span className="text-xl text-gray-800">${room.pricePerNight}</span>

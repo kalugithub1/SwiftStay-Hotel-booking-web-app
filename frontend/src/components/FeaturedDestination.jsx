@@ -4,20 +4,27 @@ import Title from "./Title";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
+// Component to display a section of featured hotel destinations
 const FeaturedDestination = () => {
+  // Get rooms data and navigate function from global context
   const { rooms, navigate } = useAppContext();
   return (
     rooms.length > 0 && (
       <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 py-20">
+        {/* Section heading */}
         <Title
           title="Featured Destination"
           subtitle="Discover our handpicked selection of exceptional properties in Kenya, offering unparalleled luxury and unforgettable experiences."
         />
+
+        {/* Display the first four featured rooms */}
         <div className="flex flex-wrap items-center justify-center gap-6 mt-20">
           {rooms.slice(0, 4).map((room, index) => (
             <HotelCard key={room._id} room={room} index={index} />
           ))}
         </div>
+
+        {/* Button navigating to all room listings */}
         <button
           onClick={() => {
             navigate("/rooms");

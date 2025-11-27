@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// creating schema for booking
+
 const bookingSchema = new mongoose.Schema(
   {
     user: { type: String, ref: "User", required: true },

@@ -4,22 +4,32 @@ import { useNavigate } from "react-router-dom";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import { toast } from "react-hot-toast";
 
+// Set base URL for axios from environment variable
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
+// Create the App context
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  // Currency symbol, defaults to "$" if not set
   const currency = import.meta.env.VITE_CURRENCY || "$";
+
+  // Navigation hook from react-router
   const navigate = useNavigate();
+
+  // Clerk hooks for user info and authentication token
   const { user } = useUser();
   const { getToken } = useAuth();
-  const [isOwner, setIsOwner] = useState(false);
-  const [showHotelReg, setShowHotelReg] = useState(false);
 
-  const [searchCities, setSearchCities] = useState([]);
+  // App state
+  const [isOwner, setIsOwner] = useState(false); // Checks if user is a hotel owner
+  const [showHotelReg, setShowHotelReg] = useState(false); // Toggle hotel registration modal
 
-  const [rooms, setRooms] = useState([]);
+  const [searchCities, setSearchCities] = useState([]); // Stores recent searched cities
 
+  const [rooms, setRooms] = useState([]); // Stores all rooms fetched from backend
+
+  // Fetch all rooms from backend
   const fetchRooms = async () => {
     try {
       const { data } = await axios.get("/api/rooms");
@@ -33,6 +43,7 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // Fetch current user info including role and recent searched cities
   const fetchUser = async () => {
     try {
       const { data } = await axios.get("/api/user", {
@@ -54,16 +65,21 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // Fetch user info on login or when user changes
+
   useEffect(() => {
     if (user) {
       fetchUser();
     }
   }, [user]);
 
+  // Fetch rooms on component mount
+
   useEffect(() => {
     fetchRooms();
   }, []);
 
+  // Context value containing state and utility functions
   const value = {
     currency,
     navigate,
@@ -83,4 +99,5 @@ export const AppProvider = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
+// Custom hook to use AppContext in components
 export const useAppContext = () => useContext(AppContext);

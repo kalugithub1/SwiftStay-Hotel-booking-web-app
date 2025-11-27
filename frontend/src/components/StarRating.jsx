@@ -1,6 +1,8 @@
 import React from "react";
 import { assets } from "../assets/assets";
 
+// StarRating component displays a 5-star rating based on the `rating` prop
+// Default rating is 4 if no prop is provided
 const StarRating = ({ rating = 4 }) => {
   return (
     <>

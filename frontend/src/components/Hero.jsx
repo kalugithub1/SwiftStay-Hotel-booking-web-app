@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
+// Hero section with search functionality
 const Hero = () => {
   const [destination, setDestination] = useState("");
   const { navigate, getToken, axios, setSearchedCities } = useAppContext();
@@ -28,22 +29,30 @@ const Hero = () => {
     });
   };
   return (
+    // Background hero banner
     <div className='flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px32 text-white bg-[url("/src/assets/heroImage.png")] bg-no-repeat bg-cover bg-center  h-screen'>
+      {/* Tagline */}
       <p className="bg-[#49B9FF]/50 px-3.5 py-1 rounded-full mt-20">
         The Ultimate Hotel Experience
       </p>
+
+      {/* Main heading */}
       <h1 className="font-playfair text-2xl md:text-5xl md:text-[56px] md:leading-[56px] font-bold md:font-extrabold max-w-xl mt-4">
         Discover Your Perfect Gateway Destination
       </h1>
+
+      {/* Subtext */}
       <p className="max-w-130 mt-2 text-sm md:text-base">
         Unparalleled luxury and comfort await at the Kenya's most exclusive
         hotels and resorts. Start your journey today.
       </p>
 
+      {/* Main search bar form */}
       <form
         onSubmit={onSearch}
         className="bg-white text-gray-500 rounded-lg px-6 py-4 mt-8 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto"
       >
+        {/* Destination field with auto-suggestions */}
         <div>
           <div className="flex items-center gap-2">
             <img src={assets.calenderIcon} alt="" className="h-4" />
@@ -60,6 +69,8 @@ const Hero = () => {
             placeholder="Type here"
             required
           />
+
+          {/* Autocomplete list of cities */}
           <datalist id="destinations">
             {cities.map((city, index) => (
               <option value={city} key={index} />
@@ -67,6 +78,7 @@ const Hero = () => {
           </datalist>
         </div>
 
+        {/* Check-in date */}
         <div>
           <div className="flex items-center gap-2">
             <img src={assets.calenderIcon} alt="" className="h-4" />
@@ -79,6 +91,7 @@ const Hero = () => {
           />
         </div>
 
+        {/* Check-out date */}
         <div>
           <div className="flex items-center gap-2">
             <img src={assets.calenderIcon} alt="" className="h-4" />
@@ -91,6 +104,7 @@ const Hero = () => {
           />
         </div>
 
+        {/* Guests input */}
         <div className="flex md:flex-col max-md:gap-2 max-md:items-center">
           <label htmlFor="guests">Guests</label>
           <input
@@ -103,6 +117,7 @@ const Hero = () => {
           />
         </div>
 
+        {/* Search button */}
         <button className="flex items-center justify-center gap-1 rounded-md bg-black py-3 px-4 text-white my-auto cursor-pointer max-md:w-full max-md:py-1">
           <img src={assets.searchIcon} alt="searchIcon" className="h-7" />
 

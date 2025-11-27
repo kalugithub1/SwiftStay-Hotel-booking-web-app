@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+//creating schema for rooms
+
 const roomSchema = new mongoose.Schema(
   {
     hotel: { type: String, required: true, ref: "Hotel" },

@@ -3,17 +3,21 @@ import Title from "./Title";
 import { testimonials } from "../assets/assets";
 import StarRating from "./StarRating";
 
+// Testimonials component renders a list of guest reviews for SwiftStay
 const Testimonials = () => {
   return (
     <div className="flex flex-col items-center px-6 md:px-16 lg:px-24 bg-slate-50 pt-20 pb-30">
+      {/* Section title and subtitle */}
       <Title
         title="What our Guests Say"
         subtitle="Discover why discerning travelers consistently choose SwiftStay for their exclusive and luxurious accommodations in Kenya."
       />
 
+      {/* Testimonials grid */}
       <div className="flex flex-wrap items-center  gap-6 mt-20 ">
         {testimonials.map((testimonial) => (
           <div key={testimonial.id} className="bg-white p-5 rounded-xl shadow ">
+            {/* Guest info: profile image, name, and location */}
             <div className="flex items-center gap-3">
               <img
                 className="w-12 h-12 rounded-full"
@@ -25,9 +29,12 @@ const Testimonials = () => {
                 <p className="text-gray-500">{testimonial.address}</p>
               </div>
             </div>
+
+            {/* Star rating */}
             <div className="flex items-center gap-1 mt-4">
               <StarRating />
             </div>
+            {/* Review text */}
             <p className="text-gray-500 max-w-90 mt-4">
               "{testimonial.review}"
             </p>
