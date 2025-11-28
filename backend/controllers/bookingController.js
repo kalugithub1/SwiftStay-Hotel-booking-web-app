@@ -1,6 +1,6 @@
 // function to check availability of the room
 
-//import transporter from "../configs/nodemailer.js";
+import transporter from "../configs/nodemailer.js";
 import Booking from "../models/Booking.js";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
@@ -46,6 +46,8 @@ export const createBooking = async (req, res) => {
   try {
     const { room, checkInDate, checkOutDate, guests } = req.body;
     const user = req.user._id;
+    const clientEmail = req.user.email;
+    const clientName = req.user.username || "Valued Client";
     //Before Booking check availability
     const isAvailable = await checkAvailability({
       checkInDate,
@@ -75,38 +77,83 @@ export const createBooking = async (req, res) => {
       checkOutDate,
       totalPrice,
     });
-    /*
+
+    // --- START EMAIL LOGIC ---
+    // Prepare data for the email template
+    const currencySymbol = process.env.CURRENCY || "$";
+    const formattedTotalPrice = booking.totalPrice.toFixed(2);
+
+    const htmlContent = `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+            <div style="background-color: #4A90E2; padding: 20px; color: white;">
+                <h1 style="margin: 0; font-size: 24px;">Booking Confirmed!</h1>
+            </div>
+            <div style="padding: 20px;">
+                <p>Dear ${clientName},</p>
+                <p>Thank you for choosing us! Your booking has been successfully confirmed. Here are your details:</p>
+                
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0; border-bottom: 1px dashed #eee;">Booking ID:</td>
+                        <td style="padding: 8px 0; border-bottom: 1px dashed #eee; text-align: right;">${
+                          booking._id
+                        }</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0; border-bottom: 1px dashed #eee;">Hotel:</td>
+                        <td style="padding: 8px 0; border-bottom: 1px dashed #eee; text-align: right;">${
+                          roomData.hotel.name
+                        }</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0; border-bottom: 1px dashed #eee;">Room Type:</td>
+                        <td style="padding: 8px 0; border-bottom: 1px dashed #eee; text-align: right;">${
+                          roomData.roomType || "Standard"
+                        }</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0; border-bottom: 1px dashed #eee;">Check-in Date:</td>
+                        <td style="padding: 8px 0; border-bottom: 1px dashed #eee; text-align: right;">${new Date(
+                          booking.checkInDate
+                        ).toDateString()}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0; border-bottom: 1px dashed #eee;">Check-out Date:</td>
+                        <td style="padding: 8px 0; border-bottom: 1px dashed #eee; text-align: right;">${new Date(
+                          booking.checkOutDate
+                        ).toDateString()}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold; padding: 8px 0;">Total Guests:</td>
+                        <td style="padding: 8px 0; text-align: right;">${
+                          booking.guests
+                        }</td>
+                    </tr>
+                </table>
+                
+                <div style="margin-top: 30px; text-align: center; background-color: #f7f7f7; padding: 15px; border-radius: 6px;">
+                    <p style="margin: 0;"><strong>Total Booking Amount:</strong></p>
+                    <h2 style="color: #E94C3D; margin-top: 5px;">${currencySymbol} ${formattedTotalPrice}</h2>
+                </div>
+
+                <p style="margin-top: 30px; text-align: center; font-size: 12px; color: #777;">
+                    Please contact us if you need to make any amendments to your booking.
+                </p>
+            </div>
+            <div style="background-color: #f2f2f2; padding: 10px; text-align: center; font-size: 11px; color: #555;">
+                This confirmation was sent to ${clientEmail}.
+            </div>
+        </div>
+    `;
 
     const mailOptions = {
       from: process.env.SENDER_EMAIL,
-      to: req.user.email,
-      subject: "Hotel Booking Details",
-      html: `
-       <h2>Your Booking Details</h2>
-       <p>Dear ${req.user.username},</p>
-       <p>Thank you for booking ! Here are your details:</p>
-
-       <ul>
-        <li><strong>Booking ID:</strong> ${booking._id}</li>
-        <li><strong>Hotel Name:</strong> ${roomData.hotel.name}</li>
-        <li><strong>Location:</strong> ${roomData.hotel.address}</li>
-        <li><strong>Date:</strong> ${booking._id}</li>
-        <li><strong>Booking ID:</strong> ${booking.checkInDate.toDateString()}</li>
-        <li><strong>Booking Amount:</strong> ${process.env.CURRENCY || "$"} ${
-        booking.totalPrice
-      }/night</li>
-        
-       </ul>
-
-      <p>We look forward to welcoming you!</p>
-      <p>If you need to make any changes, feel free to contact us.</p>
-
-
-      `,
+      to: clientEmail, // Use the extracted clientEmail
+      subject: `[Confirmed] Your Hotel Booking at ${roomData.hotel.name}`,
+      html: htmlContent,
     };
 
     await transporter.sendMail(mailOptions);
-    */
 
     res.json({ success: true, message: "Booking created successfully" });
   } catch (error) {
@@ -133,7 +180,7 @@ export const getUserBookings = async (req, res) => {
 
 export const getHotelBookings = async (req, res) => {
   try {
-    const hotel = await Hotel.findOne({ owner: req.auth.userId });
+    const hotel = await Hotel.findOne({ owner: req.auth().userId });
     if (!hotel) {
       return res.json({ success: false, message: "No Hotel found" });
     }
