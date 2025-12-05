@@ -1,10 +1,10 @@
 import nodemailer from "nodemailer";
 
-//Create a test account or replace with real credentials.
+//Creating an email testing account .
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
+  port: 587,
   secure: false,
   auth: {
     user: process.env.SMTP_USER,
